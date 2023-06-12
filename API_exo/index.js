@@ -10,6 +10,12 @@ const postRoutes = require("./routes/post");
 
 const mongoose = require("mongoose");
 
+const bcrypt = require("bcrypt");
+
+var jwt = require("jsonwebtoken");
+
+
+
 const errorHandler = require("./middlewares/gestionError");
 const gestionError = require("./middlewares/gestionError");
 
