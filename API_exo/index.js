@@ -14,12 +14,18 @@ const bcrypt = require("bcrypt");
 
 var jwt = require("jsonwebtoken");
 
+const authenticateToken = require("./middlewares/auth");
 
+const authRoutes = require("./routes/auth");
 
 const errorHandler = require("./middlewares/gestionError");
 const gestionError = require("./middlewares/gestionError");
 
 const app = express();
+
+/*function app() {
+  return <div class="bg-blue-500 text-white p-4">Hello, Tailwind CSS!</div>;
+}*/
 
 //place un middleware permet de parser le
 //contenu du body des re
@@ -27,7 +33,7 @@ app.use(bodyParser.json());
 
 app.use("/", (req, res, next) => {
   console.log("je suis un mddleware ");
-  req.test = "hello";
+  req.test = "hola";
   //res.send("hola amigo como esta ?  bien y tu ?");
   next();
 });
@@ -36,6 +42,8 @@ app.use((req, res, next) => {
   console.log(req.test);
   next();
 });
+
+app.use("/auth", authRoutes);
 
 app.use("/product", productsRoutes);
 
@@ -60,4 +68,3 @@ mongoose
   .catch((error) => {
     console.error("Erreur lors de la connexion à la base de données :", error);
   });
-  
